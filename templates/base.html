@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="widht=device-width, initial-scale=1.0">
+    <title>PERUSTAKAAN UMUM</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  </head>
+  {% include 'judul.html' %}
+  <body>
+
+    {% block content %}
+
+    {% endblock %}
+
+      <script src="{% static 'js/bootstrap.bundle.min.js'%}" ></script>
+
+  </body>
+</html>

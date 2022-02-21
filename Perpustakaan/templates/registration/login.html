@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<center>
+  <a href="{% url 'buku'%}" class="btn btn-primary">ANDA SUDAH LOGIN</a>
+  <p class="text text-muted">click untuk kembali</p>
+</center>
+
+{% else %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+    <div class="card-header">
+      LOGIN
+    </div>
+    <div class="card-body">
+      <form  method="post">
+        {% csrf_token%}
+        {{form.as_p}}
+        <button class="btn btn-primary">MASUK</button>
+      </form>
+    </div>
+    </div>
+  </div>
+</div>
+
+{% endif%}
+
+
+
+{% endblock%}

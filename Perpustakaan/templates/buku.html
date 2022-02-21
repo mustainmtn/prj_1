@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{%block content%}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Data BUKU</h3>
+        <a href="{%url 'tambah_buku'%}" class="btn btn-primary">Tambah</a>
+        <a href="{%url 'keluar'%}" class="btn btn-danger">Keluar</a>
+
+      {% for item in messages %}
+        {% if item %}
+          <div class="alert alert-success">{{ item }}</div>
+        {%endif%}
+      {% endfor %}
+
+      <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+                <th>JUDUL</th>
+                <th>PENULIS</th>
+                <th>PENERBIT</th>
+                <th>JUMLAH</th>
+                <th>KATEGORI</th>
+                <th>ACTION</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for items in books %}
+              <tr>
+                <td>
+                  {% if items.cover %}
+                    <img src="{{ items.cover.url }}" width="90" alt="">
+                  {% endif %}
+                </td>
+                <td><a href="{% url 'ubah_buku' items.id %}">{{ items.judul }}</a></td>
+                <td>{{ items.penulis}}</td>
+                <td>{{ items.penerbit}}</td>
+                <td>{{ items.jumlah}}</td>
+                <td>{{ items.kelompok_id}}</td>
+                <td>
+                  <button data-bs-toggle="modal" data-bs-target="#hapus-{{items.id}}" class="btn btn-danger">Hapus</button>
+                </td>
+                <div class="modal" id="hapus-{{items.id}}">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+
+                      <div class="modal-header">
+                        <div class="title">
+                            <h3>Hapus</h3>
+                        </div>
+                      </div>
+
+                      <div class="modal-body">
+                        Are you Sure? Delete <strong>{{items.judul}}</strong>
+                      </div>
+
+                      <div class="modal-footer">
+                        <a href="{% url 'hapus_buku' items.id %}" class="btn btn-danger">Hapus</a>
+                        <button class= "btn btn-dark" data-bs-dismiss="modal">close</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
